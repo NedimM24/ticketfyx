@@ -41,6 +41,7 @@ export const addNewUser = [
         }
     const {email, password} = req.body;
     try {
+        //Convert user entered pw into a hashed pw with bcrypt
         const hashedPassword = await bcrypt.hash(password, 10);
         await registerUser(email, hashedPassword);
         res.redirect('/');
@@ -61,3 +62,7 @@ export function showForm(_req: Request, res: Response) {
     res.render('registerForm', {title : 'Register User'})
 };
 
+//Displays the login form
+export function showLoginForm(_req: Request, res: Response) {
+    res.render('loginForm')
+};

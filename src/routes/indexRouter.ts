@@ -1,7 +1,10 @@
 import express from 'express';
 
 import { test } from '../controllers/ticketController';
-import { showForm, addNewUser } from '../controllers/authController';
+import { showForm,
+            addNewUser, 
+            showLoginForm, 
+        } from '../controllers/authController';
 
 const router = express.Router();
 
@@ -12,6 +15,7 @@ router.post('/register', addNewUser);
 
 //READ
 router.get('/register', showForm);
+router.get('/login', showLoginForm)
 
 
 

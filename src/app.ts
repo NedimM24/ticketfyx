@@ -2,6 +2,10 @@ import express from 'express';
 import router from './routes/indexRouter';
 import 'dotenv/config';
 
+import session from 'express-session';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 

@@ -1,0 +1,19 @@
+<body>
+    <%- include("partials/errors.ejs") %>
+    <form action="/login" method="post">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required minlength="3" maxlength="254">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required minlength="8" maxlength="128">
+
+        <label for="confirmPassword">Confrim password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8" maxlength="128">
+
+        <button type="submit">Login</button>
+
+        <p>New to TicketFyx? <a href="/register">Register</a> </p>
+
+    </form>
+</body>
