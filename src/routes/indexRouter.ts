@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', test);
 
 //CREATE
-//router.post('/register', addNewUser);
+router.post('/register', addNewUser);
 
 //READ
 router.get('/register', showForm);
