@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 
-import { test } from '../controllers/ticketController';
+import { home } from '../controllers/homeController';
 import { showForm,
             addNewUser, 
             showLoginForm, 
@@ -11,7 +11,7 @@ import { isAuth } from './authMiddleware';
 
 const router = express.Router();
 
-router.get('/', isAuth, test);
+router.get('/', isAuth, home);
 
 router.post('/login',
     passport.authenticate('local', {

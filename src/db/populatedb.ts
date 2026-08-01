@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR ( 100 ) NOT NULL UNIQUE,
   password TEXT NOT NULL,
   role TEXT NOT NULL DEFAULT 'worker' CHECK (role in ('worker', 'developer', 'admin')),
-  admin BOOLEAN NOT NULL DEFAULT FALSE,
   account_creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -33,11 +32,11 @@ CREATE TABLE IF NOT EXISTS comments (
 
 TRUNCATE users, tickets, comments RESTART IDENTITY CASCADE;
 
-INSERT INTO users (email, password, role, admin)
+INSERT INTO users (email, password, role)
 VALUES
-  ('alice_worker', '$2b$10$Wk8kZ8jGZ8yQ9F5Y5wq8XeQvL0y6z1Y5w1c8pJt9c3l4V2R6dGYji', 'worker', FALSE),
-  ('bob_dev', '$2b$10$Wk8kZ8jGZ8yQ9F5Y5wq8XeQvL0y6z1Y5w1c8pJt9c3l4V2R6dGYji', 'developer', FALSE),
-  ('carol_admin', '$2b$10$Wk8kZ8jGZ8yQ9F5Y5wq8XeQvL0y6z1Y5w1c8pJt9c3l4V2R6dGYji', 'admin', TRUE);
+  ('nedWorker@gmail.com', '$2b$10$Fp2/09N1.tPBVKZJBswpnOug1j9nIP10R15.bU24PojyVAAzCC2Im', 'worker'),
+  ('nedDev@gmail.com', '$2b$10$Fp2/09N1.tPBVKZJBswpnOug1j9nIP10R15.bU24PojyVAAzCC2Im', 'developer'),
+  ('nedAdmin@gmail.com', '$2b$10$Fp2/09N1.tPBVKZJBswpnOug1j9nIP10R15.bU24PojyVAAzCC2Im', 'admin');
 
 INSERT INTO tickets (title, description, status, priority, creator, assigned_developer)
 VALUES
