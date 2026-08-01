@@ -7,9 +7,11 @@ import { showForm,
             showLoginForm, 
         } from '../controllers/authController';
 
+import { isAuth } from './authMiddleware';
+
 const router = express.Router();
 
-router.get('/', test);
+router.get('/', isAuth, test);
 
 router.post('/login',
     passport.authenticate('local', {

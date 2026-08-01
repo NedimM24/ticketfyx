@@ -1,11 +1,5 @@
 <body>
-    <% if(user) { %>
         <h1>hey <%= user.email%></h1>
         <h2>You are a <%= user.role%></h2>
         <a href="/log-out">log-out</a>
-    <% } else { %>
-        <h1>Heya! You arent logged in</h1>
-        <a href="/login">login</a>
-    <% } %>
-    
 </body>
