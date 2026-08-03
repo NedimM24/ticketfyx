@@ -20,7 +20,7 @@ export const isAdmin: RequestHandler = (req, res, next): void => {
     }
 };
 
-//If user is an Admin we can move forward
+//If user is an dev we can move forward
 export const isDeveloper: RequestHandler = (req, res, next): void => {
     const user = req.user as {role: string};
 

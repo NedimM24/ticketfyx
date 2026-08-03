@@ -20,10 +20,10 @@ router.post('/login',
     })
 );
 
-//CREATE
+//CREATE ROUTES
 router.post('/register', addNewUser);
 
-//READ
+//READ ROUTES
 router.get('/register', showForm);
 router.get('/login', showLoginForm)
 
@@ -38,7 +38,7 @@ router.get("/log-out", (req, res, next) => {
 });
 
 
-//Test
+//Test PRINTS THE USER TO CONSOLE
 router.get('/profile', (req, res ) => {
     console.log(req.user);
 })
