@@ -6,7 +6,7 @@ export async function registerUser(
     password: string, 
     ): Promise<void>{
         await pool.query(
-            'INSERT INTO users(email, password) values ($1, $2)',
+            "INSERT INTO users(email, password) values ($1, $2)",
             [email, password],
         );
 }
@@ -16,6 +16,7 @@ export async function setRoleToDev(
     id:number
 ) : Promise <void>{
     await pool.query(
-        'UPDATE users SET role = "developer" WHERE id = $1',
+        "UPDATE users SET role = 'developer' WHERE id = $1",
         [id]
     )
+}

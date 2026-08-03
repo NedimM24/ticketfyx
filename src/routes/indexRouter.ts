@@ -5,9 +5,11 @@ import { home } from '../controllers/homeController';
 import { showForm,
             addNewUser, 
             showLoginForm, 
+            showDevRegisterForm,
+            setRoleToDeveloper
         } from '../controllers/authController';
 
-import { isAuth } from './authMiddleware';
+import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
 
 const router = express.Router();
 
@@ -22,10 +24,12 @@ router.post('/login',
 
 //CREATE ROUTES
 router.post('/register', addNewUser);
+router.post('/devRegister', isAuth, setRoleToDeveloper);
 
 //READ ROUTES
 router.get('/register', showForm);
 router.get('/login', showLoginForm)
+router.get('/devRegister', isAuth, showDevRegisterForm)
 
 //LOGOUT
 router.get("/log-out", (req, res, next) => {

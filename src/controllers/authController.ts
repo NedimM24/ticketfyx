@@ -1,7 +1,16 @@
 import type { Request, Response } from 'express';
-import { registerUser } from '../db/authQueries';
+import { registerUser, setRoleToDev } from '../db/authQueries';
 import { body, validationResult, Meta } from 'express-validator';
 const bcrypt = require("bcryptjs");
+
+// Need to tell TS about the user
+type AuthenticatedUser = {
+    id: number;
+    email: string;
+    password: string;
+    role: string;
+    account_creation_date: Date;
+}
 
 
 //CREATE CONTROLLERS
@@ -55,6 +64,47 @@ export const addNewUser = [
     }
 ];
 
+// VALIDATION AND CONTROLLER FOR THE DEV CODE
+const codeLowerCase = "Must be lowercase";
+const codeLength = "Must be 6 characters long";
+
+const validateDevCode = [
+    body('devcode').trim()
+    .isLowercase().withMessage(codeLowerCase)
+    .isLength({min: 6, max: 6}).withMessage(codeLength)
+]
+
+//Validate the developer code before running the controller
+export const setRoleToDeveloper = [
+    ...validateDevCode,
+     async (req: Request, res: Response) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).render('devRegisterForm', {
+                errors: errors.array(), 
+            });
+        }
+        //Get the user submitted dev dcode form the form
+        const {devcode}  = req.body;
+        const user = req.user as AuthenticatedUser;
+        const userId = user.id;
+        try {
+            //check if they entered dev 123
+            if(devcode === "dev123"){
+                await setRoleToDev(userId);
+                res.redirect('/');
+            } else {
+                return res.status(400).render('devRegisterForm', {
+                    errors:[{msg: "Incorrect dev code. Please try again. HINT(dev123)"}]
+                })
+            }
+        } catch (error) {
+            return res.status(500).render('devRegisterForm', {
+                errors: [{msg: "Oops, something went wrong. Please try again."}]
+            })
+        }
+    }
+]
 //READ CONTROLLER
 
 //Displays the registation form
@@ -66,3 +116,9 @@ export function showForm(_req: Request, res: Response) {
 export function showLoginForm(_req: Request, res: Response) {
     res.render('loginForm')
 };
+
+//Displays the dev register form
+export function showDevRegisterForm(_req: Request, res: Response) {
+    res.render('devRegisterForm')
+};
+
