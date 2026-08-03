@@ -1,4 +1,4 @@
-import session from 'express-session';
+
 import passport from 'passport';
 import { Strategy as LocalStrategy, VerifyFunction } from 'passport-local';
 import bcrypt from 'bcryptjs';
@@ -15,13 +15,13 @@ const verifyCallback: VerifyFunction = async (email, password, done) => {
         const user = rows[0];
 
         if (!user) {
-            return done(null, false, { message: "Incorrect username" });
+            return done(null, false, { message: "Incorrect username or password" });
         }
 
         const match = await bcrypt.compare(password, user.password);
 
         if (!match) {
-            return done(null, false, { message: "Incorrect password" });
+            return done(null, false, { message: "Incorrect username or password" });
         }
 
         return done(null, user);

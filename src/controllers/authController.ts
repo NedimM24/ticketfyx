@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import { registerUser, setRoleToDev } from '../db/authQueries';
 import { body, validationResult, Meta } from 'express-validator';
-const bcrypt = require("bcryptjs");
+import bcrypt from 'bcryptjs';
 
 // Need to tell TS about the user
 type AuthenticatedUser = {
@@ -53,8 +53,7 @@ export const addNewUser = [
         //Convert user entered pw into a hashed pw with bcrypt
         const hashedPassword = await bcrypt.hash(password, 10);
         await registerUser(email, hashedPassword);
-        res.redirect('/');
-        //res.redirect('/login') //when user registers, send them to login
+        res.redirect('/login') //when user registers, send them to login
     } catch (error) {
         return res.status(400).render('registerForm', {
             title: 'Register User',
@@ -113,8 +112,11 @@ export function showForm(_req: Request, res: Response) {
 };
 
 //Displays the login form
-export function showLoginForm(_req: Request, res: Response) {
-    res.render('loginForm')
+export function showLoginForm(req: Request, res: Response) {
+    const messages = req.flash('error');
+    res.render('loginForm', {
+        errors: messages.map(msg => ({msg}))
+    })
 };
 
 //Displays the dev register form

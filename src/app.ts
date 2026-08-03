@@ -2,7 +2,7 @@ import express from 'express';
 import router from './routes/indexRouter';
 import 'dotenv/config';
 import { pool } from './db/pool';
-
+import flash from 'connect-flash';
 import "./config/passport";
 
 import session from 'express-session';
@@ -24,12 +24,13 @@ app.use(session({
     }),
     secret: "my-secret-key",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         maxAge: 30 * 24 * 60 * 60 * 1000
     }
 }));
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
