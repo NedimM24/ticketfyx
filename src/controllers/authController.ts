@@ -12,7 +12,6 @@ type AuthenticatedUser = {
     account_creation_date: Date;
 }
 
-
 //CREATE CONTROLLERS
 
 //New User Validation

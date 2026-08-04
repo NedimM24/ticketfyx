@@ -4,16 +4,17 @@ import 'dotenv/config';
 import { pool } from './db/pool';
 import flash from 'connect-flash';
 import "./config/passport";
+import path from "path";
 
 import session from 'express-session';
 import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
 
 const pgSession = require("connect-pg-simple")(session);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({

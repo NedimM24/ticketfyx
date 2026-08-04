@@ -56,12 +56,3 @@ export function showNewTicketForm(req: Request, res: Response){
     res.render('newTicketForm');
 }
 
-//Renders the home page while passing ejs the tickets array
-export async function displayTickets(req:Request, res: Response){
-    try {
-        const tickets = await getAllTickets();
-        res.render('home', {tickets});
-    } catch (error) {
-        res.status(500).send('Something went wrong loading the tickets')
-    }
-}
