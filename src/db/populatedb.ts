@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS tickets (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  title TEXT,
-  description TEXT,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'open' CHECK (status in('open', 'in progress', 'testing', 'resolved')),
   priority TEXT NOT NULL DEFAULT 'low' CHECK(priority in('low', 'medium', 'high', 'critical')),
   ticket_creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS tickets (
 
 CREATE TABLE IF NOT EXISTS comments (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  comment TEXT,
+  comment TEXT NOT NULL,
   comment_creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   creator INTEGER REFERENCES users(id) ON DELETE CASCADE,
   ticket_id INTEGER REFERENCES tickets(id) ON DELETE CASCADE

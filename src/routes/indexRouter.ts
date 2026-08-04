@@ -9,6 +9,10 @@ import { showForm,
             setRoleToDeveloper
         } from '../controllers/authController';
 
+import { showNewTicketForm,
+          addNewTicket
+} from '../controllers/ticketController';
+
 import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
 
 const router = express.Router();
@@ -26,11 +30,14 @@ router.post('/login',
 //CREATE ROUTES
 router.post('/register', addNewUser);
 router.post('/devRegister', isAuth, setRoleToDeveloper);
+router.post('/newTicket', isAuth, addNewTicket);
+
 
 //READ ROUTES
 router.get('/register', showForm);
-router.get('/login', showLoginForm)
-router.get('/devRegister', isAuth, showDevRegisterForm)
+router.get('/login', showLoginForm);
+router.get('/devRegister', isAuth, showDevRegisterForm);
+router.get('/newTicket', isAuth, showNewTicketForm);
 
 //LOGOUT
 router.get("/log-out", (req, res, next) => {
@@ -42,13 +49,10 @@ router.get("/log-out", (req, res, next) => {
   });
 });
 
-
 //Test PRINTS THE USER TO CONSOLE
 router.get('/profile', (req, res ) => {
     console.log(req.user);
 })
-
-
 
 export default router;
 

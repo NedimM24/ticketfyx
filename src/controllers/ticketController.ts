@@ -1,5 +1,54 @@
 import type { Request, Response } from 'express';
+import { body, validationResult, Meta } from 'express-validator';
+import { newTicket } from '../db/ticketQueries';
 
-export function test(req: Request, res: Response) {
-    res.render('test', {user : req.user})
-};
+
+// Need to tell TS about the user
+type AuthenticatedUser = {
+    id: number;
+    email: string;
+    password: string;
+    role: string;
+    account_creation_date: Date;
+}
+
+const titleLengthError = 'Title must be between 3 and 30 chars';
+const issueLengthError = 'Issue must be between 10 and 300 chars';
+const priorityError = 'Invalid priority'
+
+//BASIC VALIDATION FOR TICKET FORM. LENGTH AND PRIORITY RADIO BUTTONS
+const validateTicket = [
+    body('title').trim()
+        .isLength({min: 3, max: 30}).withMessage(titleLengthError),
+    body('description').trim()
+        .isLength({min: 10, max: 300}).withMessage(issueLengthError),
+    body('priority')
+        .isIn(['low', 'medium', 'high', 'critical']).withMessage(priorityError)
+]
+
+export const addNewTicket = [
+    ...validateTicket,
+    async (req: Request, res: Response) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).render('newTicketForm', {
+                errors: errors.array(), 
+            });
+        }
+        const { title, description, priority } = req.body;
+        const user = req.user as AuthenticatedUser;
+        const creator = user.id;
+
+        try {
+            await newTicket(title, description, priority, creator);
+            res.redirect('/');
+        } catch (error) {
+            return res.status(500).render('newTicketForm', {
+                errors: [{msg: "Oops, something went wrong. Please try again."}]
+            })
+        }
+    }]
+
+export function showNewTicketForm(req: Request, res: Response){
+    res.render('newTicketForm');
+}

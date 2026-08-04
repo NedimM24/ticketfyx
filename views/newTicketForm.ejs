@@ -1,0 +1,36 @@
+<body>
+        <%- include("partials/errors.ejs") %>
+        <form action="/newTicket" method="post">
+
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required>
+
+            <label for="description">Describe your issue:</label>
+            <textarea name="description" id="description" required></textarea>
+
+            <label>Priority</label>
+            <label for="low">
+                <input type="radio" id="low" name="priority" value="low" checked>
+                Low
+            </label>
+
+            <label for="medium">
+                <input type="radio" id="medium" name="priority" value="medium">
+                Medium
+            </label>
+
+            <label for="high">
+                <input type="radio" id="high" name="priority" value="high">
+                High
+            </label>
+
+            <label for="critical">
+                <input type="radio" id="critical" name="priority" value="critical">
+                Critical
+            </label>      
+
+            <button type="submit">Submit ticket</button>
+
+        </form>
+ </body>
+
