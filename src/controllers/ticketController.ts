@@ -26,6 +26,8 @@ const validateTicket = [
         .isIn(['low', 'medium', 'high', 'critical']).withMessage(priorityError)
 ]
 
+//GRABS USER INFO FROM THE FORM ALONG WITH THE CREATOR ID TO USE AS ARGUEMENTS
+//IF THE NEW TICKET QUERY PASSES, USER IS REDIRECTED TO THE HOME PAGE
 export const addNewTicket = [
     ...validateTicket,
     async (req: Request, res: Response) => {
