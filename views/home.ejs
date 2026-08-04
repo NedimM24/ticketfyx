@@ -1,14 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+</head>
 <body>
         <!-- if the user is a worker, they can click to become a dev
              will move this into header eventtually -->
 
         <% if(user.role === 'worker'){%>
                 <a href="/devRegister">Become a dev</a>
-                <a href="/newTicket">Create a new ticket </a>
         <% } %>
         
-
+        <a href="/newTicket">Create a new ticket </a>
+        
         <h1>hey <%= user.email%></h1>
         <h2>You are a <%= user.role%></h2>
         <a href="/log-out">log-out</a>
+
+        <h1>Tickets</h1>
+        <% tickets.forEach(function(ticket) {%>
+                <div class="ticket-container">
+                        <h4><%= ticket.title%></h4>
+                        <p><%= ticket.description%></p>
+                        <p><%= ticket.status%></p>
+                        <p><%= ticket.priority%></p>
+                        <p><%= ticket.creator_email%></p>
+                        <p><%= ticket.ticket_creation_date%></p>
+                        <p><%= ticket.assigned_developer%></p>
+                </div>
+        <% }) %>
 </body>
+</html>

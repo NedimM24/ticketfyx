@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { body, validationResult, Meta } from 'express-validator';
-import { newTicket } from '../db/ticketQueries';
+import { newTicket, getAllTickets } from '../db/ticketQueries';
 
 
 // Need to tell TS about the user
@@ -51,6 +51,17 @@ export const addNewTicket = [
         }
     }]
 
+//RENDERS THE NEW TICKET FORM
 export function showNewTicketForm(req: Request, res: Response){
     res.render('newTicketForm');
+}
+
+//Renders the home page while passing ejs the tickets array
+export async function displayTickets(req:Request, res: Response){
+    try {
+        const tickets = await getAllTickets();
+        res.render('home', {tickets});
+    } catch (error) {
+        res.status(500).send('Something went wrong loading the tickets')
+    }
 }
