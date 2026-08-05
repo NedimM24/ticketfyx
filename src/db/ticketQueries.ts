@@ -39,6 +39,20 @@ export async function getAllTickets(): Promise<Ticket[]>{
     return result.rows;
 }
 
+//GETS MY TICKETS, JOINED WITH USERS TO INCLUDE CREATORS EMAIL. EASIER TO DISPLAY
+export async function getMyTickets(id: number): Promise<Ticket[]>{
+    const result = await pool.query(
+        `SELECT tickets.*, users.email AS creator_email
+         FROM tickets
+         JOIN users ON tickets.creator = users.id 
+         WHERE tickets.creator = $1
+         ORDER BY ticket_creation_date DESC`,
+         [id]
+    )
+    return result.rows;
+}
+
+
 //UPDATE
 
 
