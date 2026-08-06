@@ -10,7 +10,8 @@ import { showForm,
         } from '../controllers/authController';
 
 import { showNewTicketForm,
-          addNewTicket
+          addNewTicket,
+          showTicketPage
 } from '../controllers/ticketController';
 
 import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
@@ -38,6 +39,7 @@ router.get('/register', showForm);
 router.get('/login', showLoginForm);
 router.get('/devRegister', isAuth, showDevRegisterForm);
 router.get('/newTicket', isAuth, showNewTicketForm);
+router.get('/ticketPage/:id', showTicketPage)
 
 //LOGOUT
 router.get("/log-out", (req, res, next) => {

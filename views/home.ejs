@@ -26,7 +26,7 @@
         <h1>Tickets</h1>
         <% tickets.forEach(function(ticket) {%>
                 <div class="ticket-container">
-                        <a class="ticket-link" href="/ticketPage">
+                        <a class="ticket-link" href="/ticketPage/<%= ticket.id%>">
                                 <div class="ticket">
                                         <h4><%= ticket.title%></h4>
                                         <p><%= ticket.description%></p>

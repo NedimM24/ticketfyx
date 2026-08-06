@@ -52,6 +52,19 @@ export async function getMyTickets(id: number): Promise<Ticket[]>{
     return result.rows;
 }
 
+export async function getTicketById(id: number): Promise<Ticket | null> {
+    const result = await pool.query(
+         `SELECT tickets.*, users.email AS creator_email
+         FROM tickets
+         JOIN users ON tickets.creator = users.id 
+         WHERE tickets.id = $1
+         ORDER BY ticket_creation_date DESC`,
+         [id]
+
+    )
+    return result.rows[0] ?? null;
+}
+
 
 //UPDATE
 

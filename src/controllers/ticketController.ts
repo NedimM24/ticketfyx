@@ -1,6 +1,9 @@
 import type { Request, Response } from 'express';
 import { body, validationResult, Meta } from 'express-validator';
-import { newTicket, getAllTickets } from '../db/ticketQueries';
+import { newTicket, 
+            getAllTickets, 
+            getTicketById,
+        } from '../db/ticketQueries';
 
 
 // Need to tell TS about the user
@@ -55,4 +58,13 @@ export const addNewTicket = [
 export function showNewTicketForm(req: Request, res: Response){
     res.render('newTicketForm');
 }
+
+//RENDERS THE TICKET PAGE
+export async function showTicketPage(req: Request, res: Response){
+    const ticketId = Number(req.params.id)
+    let clickedTicket = await getTicketById(ticketId);
+    res.render('ticketPage', {clickedTicket});
+}
+
+
 
