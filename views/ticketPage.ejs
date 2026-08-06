@@ -3,32 +3,34 @@
 <h1>testy</h1>
 
 <body>
-    <div class="ticketpage-container">
+    <main>
+        <div class="ticketpage-container">
 
-            <div class="clickedTicket">
-                <h4><%= clickedTicket.title%></h4>
-                <p><%= clickedTicket.description%></p>
-                <p><%= clickedTicket.status%></p>
-                <p><%= clickedTicket.priority%></p>
-                <p><%= clickedTicket.creator_email%></p>
-                <p><%= clickedTicket.ticket_creation_date%></p>
-                <p><%= clickedTicket.assigned_developer%></p>
-            </div> 
+                <div class="clickedTicket">
+                    <h4><%= clickedTicket.title%></h4>
+                    <p><%= clickedTicket.description%></p>
+                    <p><%= clickedTicket.status%></p>
+                    <p><%= clickedTicket.priority%></p>
+                    <p><%= clickedTicket.creator_email%></p>
+                    <p><%= clickedTicket.ticket_creation_date%></p>
+                    <p><%= clickedTicket.assigned_developer%></p>
+                </div> 
 
-            <div class="comments">
-                <h5>comments</h5>
+                <div class="comments">
+                    <h5>comments</h5>
 
-                <!---PRINT COMMENTS HERE -->
+                    <!---PRINT COMMENTS HERE -->
 
-                <form action="/comment" method="post">
-                    <label for="comment"></label>
-                    <input type="text" name="comment" id="comment"
-                    placeholder="write comment here" required>
+                    <form action="/comment" method="post">
+                        <label for="comment"></label>
+                        <input type="text" name="comment" id="comment"
+                        placeholder="write comment here" required>
 
-                    <button type="submit">Send</button>
+                        <button type="submit">Send</button>
 
-                </form>
-            </div>
-
-    </div>
+                    </form>
+                </div>
+        </div>
+    </main>
+    <%- include("partials/footer.ejs") %>
 </body>

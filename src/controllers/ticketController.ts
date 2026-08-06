@@ -59,7 +59,8 @@ export function showNewTicketForm(req: Request, res: Response){
     res.render('newTicketForm');
 }
 
-//RENDERS THE TICKET PAGE
+//GRABS THE TICKET ID FROM URL PARAMS AND USES IT TO FETCH THAT TICKET
+//SENDS THE TICKET OBJ TO TICKET PAGE EJS
 export async function showTicketPage(req: Request, res: Response){
     const ticketId = Number(req.params.id)
     let clickedTicket = await getTicketById(ticketId);

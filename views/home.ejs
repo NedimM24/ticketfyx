@@ -8,36 +8,39 @@
         
 </head>
 <body>
-        <%- include("partials/header.ejs") %>
+        <main>
+                <%- include("partials/header.ejs") %>
 
-        <!-- if the user is a worker, they can click to become a dev
-             will move this into header eventtually -->
+                <!-- if the user is a worker, they can click to become a dev
+                will move this into header eventtually -->
 
-        <% if(user.role === 'worker'){%>
-                <a href="/devRegister">Become a dev</a>
-        <% } %>
+                <% if(user.role === 'worker'){%>
+                        <a href="/devRegister">Become a dev</a>
+                <% } %>
 
-        <a href="/newTicket">Create a new ticket </a>
-        
-        <h1>hey <%= user.email%></h1>
-        <h2>You are a <%= user.role%></h2>
-        
+                <a href="/newTicket">Create a new ticket </a>
+                
+                <h1>hey <%= user.email%></h1>
+                <h2>You are a <%= user.role%></h2>
+                
 
-        <h1>Tickets</h1>
-        <% tickets.forEach(function(ticket) {%>
-                <div class="ticket-container">
-                        <a class="ticket-link" href="/ticketPage/<%= ticket.id%>">
-                                <div class="ticket">
-                                        <h4><%= ticket.title%></h4>
-                                        <p><%= ticket.description%></p>
-                                        <p><%= ticket.status%></p>
-                                        <p><%= ticket.priority%></p>
-                                        <p><%= ticket.creator_email%></p>
-                                        <p><%= ticket.ticket_creation_date%></p>
-                                        <p><%= ticket.assigned_developer%></p>
-                                </div> 
-                        </a>
-                </div>
-        <% }) %>
+                <h1>Tickets</h1>
+                <% tickets.forEach(function(ticket) {%>
+                        <div class="ticket-container">
+                                <a class="ticket-link" href="/ticketPage/<%= ticket.id%>">
+                                        <div class="ticket">
+                                                <h4><%= ticket.title%></h4>
+                                                <p><%= ticket.description%></p>
+                                                <p><%= ticket.status%></p>
+                                                <p><%= ticket.priority%></p>
+                                                <p><%= ticket.creator_email%></p>
+                                                <p><%= ticket.ticket_creation_date%></p>
+                                                <p><%= ticket.assigned_developer%></p>
+                                        </div> 
+                                </a>
+                        </div>
+                <% }) %>
+                <%- include("partials/footer.ejs") %>
+        </main>
 </body>
 </html>
