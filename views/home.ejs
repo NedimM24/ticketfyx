@@ -8,6 +8,8 @@
         
 </head>
 <body>
+        <%- include("partials/header.ejs") %>
+
         <!-- if the user is a worker, they can click to become a dev
              will move this into header eventtually -->
 
@@ -19,7 +21,7 @@
         
         <h1>hey <%= user.email%></h1>
         <h2>You are a <%= user.role%></h2>
-        <a href="/log-out">log-out</a>
+        
 
         <h1>Tickets</h1>
         <% tickets.forEach(function(ticket) {%>
