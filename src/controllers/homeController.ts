@@ -29,15 +29,3 @@ export async function home(req:Request, res: Response){
         res.status(500).send('Something went wrong loading the tickets')
     }
 }
-
-
-/**
- * try {
-        const tickets = await getAllTickets();
-        res.render('home', {user: req.user, tickets});
-    } catch (error) {
-        res.status(500).send('Something went wrong loading the tickets')
-    }
- * 
- * 
- */

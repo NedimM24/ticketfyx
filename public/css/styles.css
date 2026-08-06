@@ -1,16 +1,38 @@
 body{
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
+/* TICKET STYLING */
 .ticket{
-    border-top: 2px solid rgb(138, 136, 136);
+    border: solid 1px grey;
+    padding: .5rem;
 }
 
+.ticket:hover{
+    transform: scale(1.015);
+}
+
+.ticket:active{
+    transform: scale(1.01);
+}
+
+.ticket-link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.ticket-container{
+    padding: 1rem;
+}
+
+/* HEADER STYLING */
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
     padding: 1rem;
-
+    
 }
