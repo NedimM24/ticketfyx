@@ -14,6 +14,10 @@ import { showNewTicketForm,
           showTicketPage
 } from '../controllers/ticketController';
 
+import { insertNewComment
+
+ } from '../controllers/commentsController';  
+
 import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
 
 const router = express.Router();
@@ -32,6 +36,7 @@ router.post('/login',
 router.post('/register', addNewUser);
 router.post('/devRegister', isAuth, setRoleToDeveloper);
 router.post('/newTicket', isAuth, addNewTicket);
+router.post('/comment/:id', isAuth, insertNewComment);
 
 
 //READ ROUTES
@@ -39,7 +44,7 @@ router.get('/register', showForm);
 router.get('/login', showLoginForm);
 router.get('/devRegister', isAuth, showDevRegisterForm);
 router.get('/newTicket', isAuth, showNewTicketForm);
-router.get('/ticketPage/:id', showTicketPage)
+router.get('/ticketPage/:id', showTicketPage);
 
 //LOGOUT
 router.get("/log-out", (req, res, next) => {

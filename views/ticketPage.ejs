@@ -28,8 +28,8 @@
                     <h5>comments</h5>
 
                     <!---PRINT COMMENTS HERE -->
-
-                    <form action="/comment" method="post">
+                    <%- include("partials/errors.ejs") %>
+                    <form action="/comment/<%= clickedTicket.id%>" method="post">
                         <label for="comment"></label>
                         <input type="text" name="comment" id="comment"
                         placeholder="write comment here" required>
