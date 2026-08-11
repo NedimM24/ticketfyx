@@ -70,7 +70,11 @@ export async function showTicketPage(req: Request, res: Response){
     const ticketId = Number(req.params.id)
     let clickedTicket = await getTicketById(ticketId);
     let comments = await printCommentsByTicketId(ticketId)
-    res.render('ticketPage', {clickedTicket, comments});
+    res.render('ticketPage', {
+        clickedTicket,
+        comments,
+        user: req.user,
+    });
 }
 
 

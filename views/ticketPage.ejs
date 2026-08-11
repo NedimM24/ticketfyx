@@ -11,6 +11,11 @@
 
 <body>
     <main>
+
+        <%if(user.role === "admin" || user.role === "developer") {%>
+            <h1>hiya</h1>
+        <%}%>
+
           <%- include("partials/header.ejs") %>
         <div class="ticketpage-container">
 
