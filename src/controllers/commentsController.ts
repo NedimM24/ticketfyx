@@ -28,7 +28,7 @@ export const insertNewComment = [
             });
         }
         try {
-             //CREATOR IS FOUND USING LOGGED IN USER (req.user)
+            //CREATOR IS FOUND USING LOGGED IN USER (req.user)
             const user = req.user as AuthenticatedUser;
             const creator = user.id;
             //TICKET ID IS FOUND WITH PARAMS FROM URL

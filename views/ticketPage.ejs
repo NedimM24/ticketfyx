@@ -28,6 +28,15 @@
                     <h5>comments</h5>
 
                     <!---PRINT COMMENTS HERE -->
+
+                    <%comments.forEach((comment) => {%>
+                        <div class="comment">
+                            <p><%=comment.creator_email%></p>
+                            <p><%=comment.comment%></p>
+                            <p><%=comment.comment_creation_date%></p>
+                        </div>
+                    <%})%>
+
                     <%- include("partials/errors.ejs") %>
                     <form action="/comment/<%= clickedTicket.id%>" method="post">
                         <label for="comment"></label>
