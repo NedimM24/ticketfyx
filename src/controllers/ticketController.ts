@@ -3,6 +3,7 @@ import { body, validationResult, Meta } from 'express-validator';
 import { newTicket, 
             getAllTickets, 
             getTicketById,
+            updateTicketStatus,
         } from '../db/ticketQueries';
 
 import { printCommentsByTicketId
@@ -77,5 +78,13 @@ export async function showTicketPage(req: Request, res: Response){
     });
 }
 
+//FUNCTION GETS TICKETID FORM PARAMS AND STATUS FROM REQ BODY FROM ADMIN/DEV DROPDOWN
+//USED THOSE VARIBLED TO QUERY THE DB TO UPDATE STATUS 
+export async function handleUpdateTicketStatus(req: Request, res: Response){
+    const ticketId = Number(req.params.id)
+    const {status} = req.body;
+    await updateTicketStatus(ticketId, status);
+    res.redirect(`/ticketPage/${ticketId}`)
+}
 
 

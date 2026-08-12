@@ -11,7 +11,8 @@ import { showForm,
 
 import { showNewTicketForm,
           addNewTicket,
-          showTicketPage
+          showTicketPage,
+          handleUpdateTicketStatus
 } from '../controllers/ticketController';
 
 import { insertNewComment
@@ -37,6 +38,7 @@ router.post('/register', addNewUser);
 router.post('/devRegister', isAuth, setRoleToDeveloper);
 router.post('/newTicket', isAuth, addNewTicket);
 router.post('/comment/:id', isAuth, insertNewComment);
+router.post('/ticket/:id/status', isAuth,  handleUpdateTicketStatus);
 
 
 //READ ROUTES
