@@ -57,14 +57,39 @@
                         <p><%= clickedTicket.status%></p>
                     <%}%>  
                     
+                    <!-- 'low', 'medium', 'high', 'critical'-->
                     <%if(user.role === "admin" || user.role === "developer") {%>
-                        <h1>placeholder for priority</h1>
-                    <%} else {%>
-                        <p><%= clickedTicket.priority%></p>
-                    <%}%>  
+                        <form class="priority dropdown" 
+                            action="/ticket/<%=clickedTicket.id%>/priority" 
+                            method="post">
 
-                    
-                    
+                            <select name="priority" id="priority" onchange="this.form.submit()">
+                                <option value="open" 
+                                    <%= clickedTicket.priority === "low" ? "selected" : ""%> 
+                                    >Low
+                                </option>
+
+                                <option value="in progress" 
+                                    <%= clickedTicket.priority === "medium" ? "selected" : ""%> 
+                                    >Medium
+                                </option>
+
+                                <option value="testing" 
+                                    <%= clickedTicket.priority === "high" ? "selected" : ""%> 
+                                    >High
+                                </option>
+
+                                <option value="resolved" 
+                                    <%= clickedTicket.priority === "critical" ? "selected" : ""%> 
+                                    >Critical
+                                </option>
+                                
+                            </select>
+                        </form>
+                    <%} else {%>
+                        <p><%= clickedTicket.status%></p>
+                    <%}%>    
+
                     <p><%= clickedTicket.creator_email%></p>
                     <p><%= clickedTicket.ticket_creation_date%></p>
                     <p><%= clickedTicket.assigned_developer%></p>
