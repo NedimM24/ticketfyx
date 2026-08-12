@@ -22,8 +22,49 @@
                 <div class="clickedTicket">
                     <h4><%= clickedTicket.title%></h4>
                     <p><%= clickedTicket.description%></p>
-                    <p><%= clickedTicket.status%></p>
-                    <p><%= clickedTicket.priority%></p>
+
+                    
+                    <%if(user.role === "admin" || user.role === "developer") {%>
+                        <form class="status dropdown" 
+                            action="/ticket/<%=clickedTicket.id%>/status" 
+                            method="post">
+
+                            <!--'open', 'in progress', 'testing', 'resolved' -->
+                            <select name="status" id="status" onchange="this.form.submit()">
+                                <option value="open" 
+                                    <%= clickedTicket.status === "open" ? "selected" : ""%> 
+                                    >Open
+                                </option>
+
+                                <option value="in progress" 
+                                    <%= clickedTicket.status === "in progress" ? "selected" : ""%> 
+                                    >In Progress
+                                </option>
+
+                                <option value="testing" 
+                                    <%= clickedTicket.status === "testing" ? "selected" : ""%> 
+                                    >Testing
+                                </option>
+
+                                <option value="resolved" 
+                                    <%= clickedTicket.status === "resolved" ? "selected" : ""%> 
+                                    >Resolved
+                                </option>
+                                
+                            </select>
+                        </form>
+                    <%} else {%>
+                        <p><%= clickedTicket.status%></p>
+                    <%}%>  
+                    
+                    <%if(user.role === "admin" || user.role === "developer") {%>
+                        <h1>placeholder for priority</h1>
+                    <%} else {%>
+                        <p><%= clickedTicket.priority%></p>
+                    <%}%>  
+
+                    
+                    
                     <p><%= clickedTicket.creator_email%></p>
                     <p><%= clickedTicket.ticket_creation_date%></p>
                     <p><%= clickedTicket.assigned_developer%></p>
