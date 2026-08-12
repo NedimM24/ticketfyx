@@ -65,18 +65,26 @@ export async function getTicketById(id: number): Promise<Ticket | null> {
     return result.rows[0] ?? null;
 }
 
-
 //UPDATE
 
 //UPDATES TICKET STATUS BASED ON PASSED ID FROM THE URL PARAMS AND STATUS FROM REQ BODY
 export async function updateTicketStatus(id: number, status: string): Promise<void>{
     await pool.query(
         `UPDATE tickets
-         SET status = $1
-         WHERE id = $2`,
-         [status, id]
+        SET status = $1
+        WHERE id = $2`,
+        [status, id]
     )
 }
 
+//UPDATES TICKET STATUS BASED ON PASSED ID FROM THE URL PARAMS AND STATUS FROM REQ BODY
+export async function updateTicketPriority(id: number, priority: string): Promise<void>{
+    await pool.query(
+        `UPDATE tickets
+        SET priority = $1
+        WHERE id = $2`,
+        [priority, id]
+    )
+}
 
 //DELETE

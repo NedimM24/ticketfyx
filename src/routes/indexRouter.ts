@@ -12,7 +12,8 @@ import { showForm,
 import { showNewTicketForm,
           addNewTicket,
           showTicketPage,
-          handleUpdateTicketStatus
+          handleUpdateTicketStatus,
+          handleUpdateTicketPriority
 } from '../controllers/ticketController';
 
 import { insertNewComment
@@ -39,6 +40,7 @@ router.post('/devRegister', isAuth, setRoleToDeveloper);
 router.post('/newTicket', isAuth, addNewTicket);
 router.post('/comment/:id', isAuth, insertNewComment);
 router.post('/ticket/:id/status', isAuth,  handleUpdateTicketStatus);
+router.post('/ticket/:id/priority', isAuth,  handleUpdateTicketPriority);
 
 
 //READ ROUTES

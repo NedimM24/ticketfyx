@@ -64,22 +64,22 @@
                             method="post">
 
                             <select name="priority" id="priority" onchange="this.form.submit()">
-                                <option value="open" 
+                                <option value="low" 
                                     <%= clickedTicket.priority === "low" ? "selected" : ""%> 
                                     >Low
                                 </option>
 
-                                <option value="in progress" 
+                                <option value="medium" 
                                     <%= clickedTicket.priority === "medium" ? "selected" : ""%> 
                                     >Medium
                                 </option>
 
-                                <option value="testing" 
+                                <option value="high" 
                                     <%= clickedTicket.priority === "high" ? "selected" : ""%> 
                                     >High
                                 </option>
 
-                                <option value="resolved" 
+                                <option value="critical" 
                                     <%= clickedTicket.priority === "critical" ? "selected" : ""%> 
                                     >Critical
                                 </option>

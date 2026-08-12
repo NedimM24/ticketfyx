@@ -4,6 +4,7 @@ import { newTicket,
             getAllTickets, 
             getTicketById,
             updateTicketStatus,
+            updateTicketPriority,
         } from '../db/ticketQueries';
 
 import { printCommentsByTicketId
@@ -86,5 +87,15 @@ export async function handleUpdateTicketStatus(req: Request, res: Response){
     await updateTicketStatus(ticketId, status);
     res.redirect(`/ticketPage/${ticketId}`)
 }
+
+//FUNCTION GETS TICKETID FORM PARAMS AND PRIORITY FROM REQ BODY FROM ADMIN/DEV DROPDOWN
+//USED THOSE VARIBLED TO QUERY THE DB TO UPDATE PRIORITY 
+export async function handleUpdateTicketPriority(req: Request, res: Response){
+    const ticketId = Number(req.params.id)
+    const {priority} = req.body;
+    await updateTicketPriority(ticketId, priority);
+    res.redirect(`/ticketPage/${ticketId}`)
+}
+
 
 
