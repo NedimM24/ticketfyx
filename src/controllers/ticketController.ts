@@ -5,6 +5,7 @@ import { newTicket,
             getTicketById,
             updateTicketStatus,
             updateTicketPriority,
+            deleteTicketById
         } from '../db/ticketQueries';
 
 import { printCommentsByTicketId
@@ -95,6 +96,19 @@ export async function handleUpdateTicketPriority(req: Request, res: Response){
     const {priority} = req.body;
     await updateTicketPriority(ticketId, priority);
     res.redirect(`/ticketPage/${ticketId}`)
+}
+
+//FUNCTION THAT DELETES TICKET WHEN ADMIN CLICKS BUTTON
+//ID IS FOUND IN URL PARAMS ON TICKET PAGE AND PASSED TO DB DELETE QUERY
+export async function handleDeleteTicketById(req: Request, res: Response){
+    const ticketId = Number(req.params.id)
+    try {
+        await deleteTicketById(ticketId)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Something went wrong when deleting the tickets");
+    }
+    res.redirect('/');
 }
 
 

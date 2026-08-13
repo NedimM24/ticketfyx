@@ -93,6 +93,13 @@
                     <p><%= clickedTicket.creator_email%></p>
                     <p><%= clickedTicket.ticket_creation_date%></p>
                     <p><%= clickedTicket.assigned_developer%></p>
+
+                    <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE TICKET BUTTON -->
+                    <%if(user.role === "admin" ) {%>
+                        <form class="delete-ticket" action="/ticketPage/<%=clickedTicket.id%>/delete" method="post">
+                            <button type="submit">Delete Ticket</button>
+                        </form>
+                    <%}%>  
                 </div> 
 
                 <div class="comments">

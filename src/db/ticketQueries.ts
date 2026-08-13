@@ -88,3 +88,13 @@ export async function updateTicketPriority(id: number, priority: string): Promis
 }
 
 //DELETE
+
+//DELETES TICKET BASED ON THE GIVEN TICKET ID
+//ID WILL BE BASED ON THE PARAM ON TICKETPAGE
+export async function deleteTicketById(id: number): Promise<void>{
+    await pool.query(
+        `DELETE FROM tickets
+        WHERE id = $1`,
+        [id]
+    )
+} 
