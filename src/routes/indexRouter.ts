@@ -17,7 +17,7 @@ import { showNewTicketForm,
           handleDeleteTicketById
 } from '../controllers/ticketController';
 
-import { insertNewComment
+import { handleDeleteCommentById, insertNewComment
 
  } from '../controllers/commentsController';  
 
@@ -25,7 +25,7 @@ import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
 
 const router = express.Router();
 
-router.get('/', isAuth, home);
+
 
 router.post('/login',
     passport.authenticate('local', {
@@ -40,17 +40,23 @@ router.post('/register', addNewUser);
 router.post('/devRegister', isAuth, setRoleToDeveloper);
 router.post('/newTicket', isAuth, addNewTicket);
 router.post('/comment/:id', isAuth, insertNewComment);
-router.post('/ticket/:id/status', isAuth,  handleUpdateTicketStatus);
-router.post('/ticket/:id/priority', isAuth,  handleUpdateTicketPriority);
-router.post('/ticketPage/:id/delete', isAdmin, handleDeleteTicketById);
-
 
 //READ ROUTES
+router.get('/', isAuth, home);
 router.get('/register', showForm);
 router.get('/login', showLoginForm);
 router.get('/devRegister', isAuth, showDevRegisterForm);
 router.get('/newTicket', isAuth, showNewTicketForm);
 router.get('/ticketPage/:id', showTicketPage);
+
+//UPDATE ROUTES
+router.post('/ticket/:id/status', isAuth,  handleUpdateTicketStatus);
+router.post('/ticket/:id/priority', isAuth,  handleUpdateTicketPriority);
+
+//DELETE ROUTES
+router.post('/ticketPage/:id/delete', isAdmin, handleDeleteTicketById);
+router.post('/ticketPage/:ticketId/comments/:commentId/delete', isAdmin, handleDeleteCommentById);
+
 
 //LOGOUT
 router.get("/log-out", (req, res, next) => {

@@ -112,6 +112,14 @@
                             <p><%=comment.creator_email%></p>
                             <p><%=comment.comment%></p>
                             <p><%=comment.comment_creation_date%></p>
+
+                             <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE COMMENT BUTTON -->
+                            <%if(user.role === "admin" ) {%>
+                                <form class="delete-comment" action="/ticketPage/<%=clickedTicket.id%>/comments/<%=comment.id%>/delete" method="post">
+                                    <button type="submit">Delete Comment</button>
+                                </form>
+                            <%}%>  
+
                         </div>
                     <%})%>
 

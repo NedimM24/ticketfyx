@@ -42,3 +42,17 @@ export async function printCommentsByTicketId(
     )
     return result.rows;
 }
+
+//UPDATE
+
+//DELETE
+
+//QUERY TO DELETE A COMMENT ONCE THE ADMIN CLICKS ON THE BUTTON
+//TAKES IN ID FROM THE URL PARAMS
+export async function deleteCommentById(id: number): Promise<void>{
+    await pool.query(
+        `DELETE FROM comments
+        WHERE id = $1`,
+        [id]
+    );
+}

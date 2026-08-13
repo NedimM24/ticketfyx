@@ -1,5 +1,13 @@
 import { pool } from './pool';
 
+type User = {
+    id: number;
+    email: string;
+    password: string;
+    role: string;
+    account_creation_date: Date;
+}
+
 //Create query
 export async function registerUser(
     email: string, 
@@ -19,4 +27,13 @@ export async function setRoleToDev(
         "UPDATE users SET role = 'developer' WHERE id = $1",
         [id]
     )
+}
+
+export async function getAllDevs():Promise<User[]>{
+    const result = await pool.query(
+        `SELECT *
+        FROM users
+        WHERE role = 'developer' `
+    )
+    return result.rows;
 }

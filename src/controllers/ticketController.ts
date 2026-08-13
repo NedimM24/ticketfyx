@@ -12,6 +12,7 @@ import { printCommentsByTicketId
 
  } from '../db/commentQueries';
 
+ import { getAllDevs } from '../db/authQueries';
 
 // Need to tell TS about the user
 type AuthenticatedUser = {
@@ -69,14 +70,17 @@ export function showNewTicketForm(req: Request, res: Response){
 //GRABS THE TICKET ID FROM URL PARAMS AND USES IT TO FETCH THAT TICKET
 //SENDS THE TICKET OBJ TO TICKET PAGE EJS
 //ALSO PRINTS COMMENTS BASED ON TICKET ID
+//SENDS ARRAY OF ALL DEVS TO TICKETPAGE EJS
 export async function showTicketPage(req: Request, res: Response){
     const ticketId = Number(req.params.id)
     let clickedTicket = await getTicketById(ticketId);
     let comments = await printCommentsByTicketId(ticketId)
+    let devs = await getAllDevs();
     res.render('ticketPage', {
         clickedTicket,
         comments,
         user: req.user,
+        devs,
     });
 }
 

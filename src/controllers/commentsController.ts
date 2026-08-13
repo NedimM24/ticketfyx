@@ -1,4 +1,4 @@
-import { newComment } from "../db/commentQueries";
+import { newComment, deleteCommentById } from "../db/commentQueries";
 import type { Request, Response } from 'express';
 import { body, validationResult, Meta } from 'express-validator';
 
@@ -45,5 +45,19 @@ export const insertNewComment = [
     }
 ];
 
+//FUNCTION THAT DELETES THE COMMENT WHEN ADMIN CLICKS DELETE BUTTON
+//COMMENT AND TICKET ID ARE GRABBED FROM THE URL PARAMS ON TICKET PAGE
+export async function handleDeleteCommentById(req: Request, res: Response){
+    const comment_id = Number(req.params.commentId);
+    const ticket_id = Number(req.params.ticketId);
+    
+    try {
+        await deleteCommentById(comment_id);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Something went wrong when trying to delete the comment.')
+    }
+    res.redirect(`/ticketPage/${ticket_id}`)
+}
 
 
