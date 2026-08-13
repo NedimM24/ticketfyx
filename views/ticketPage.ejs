@@ -94,6 +94,23 @@
                     <p><%= clickedTicket.ticket_creation_date%></p>
                     <p><%= clickedTicket.assigned_developer%></p>
 
+                    <!-- dev loop -->
+                    <%if(user.role === "admin" ) {%>
+                        <form class="dev dropdown" 
+                        action="/ticketPage/<%=clickedTicket.id%>/assign" method="post"
+                        onchange="this.form.submit()"
+                        >
+
+                        <select name="assigned-dev" id="assigned-dev">
+                            <option value="placeholer" selected>Assign New Dev</option>
+                            <%devs.forEach((dev) => {%>
+                                <option value="<%=dev.id%>"><%=dev.email%></option>
+                            <%})%>
+                        </select>
+                            
+                        </form>
+                    <%}%>  
+
                     <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE TICKET BUTTON -->
                     <%if(user.role === "admin" ) {%>
                         <form class="delete-ticket" action="/ticketPage/<%=clickedTicket.id%>/delete" method="post">

@@ -25,8 +25,6 @@ import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
 
 const router = express.Router();
 
-
-
 router.post('/login',
     passport.authenticate('local', {
         successRedirect: '/',

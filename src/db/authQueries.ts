@@ -29,6 +29,7 @@ export async function setRoleToDev(
     )
 }
 
+//RETURNS AN ARRAY OF ALL USERS THE HAVE A DEV ROLE
 export async function getAllDevs():Promise<User[]>{
     const result = await pool.query(
         `SELECT *
