@@ -15,8 +15,8 @@
         <div class="ticketpage-container">
 
                 <div class="clickedTicket">
-                    <h4><%= clickedTicket.title%></h4>
-                    <p><%= clickedTicket.description%></p>
+                    <p><b>Title: </b><%= clickedTicket.title%></p>
+                    <p><b>Description: </b><%= clickedTicket.description%></p>
 
                     
                     <%if(user.role === "admin" || user.role === "developer") {%>
@@ -49,7 +49,7 @@
                             </select>
                         </form>
                     <%} else {%>
-                        <p><%= clickedTicket.status%></p>
+                        <p><b>Status: </b><%= clickedTicket.status%></p>
                     <%}%>  
                     
                     <!-- 'low', 'medium', 'high', 'critical'-->
@@ -82,12 +82,12 @@
                             </select>
                         </form>
                     <%} else {%>
-                        <p><%= clickedTicket.status%></p>
+                        <p><b>Priority: </b><%= clickedTicket.priority%></p>
                     <%}%>    
 
                     <p><b>Username: </b><%= clickedTicket.creator_email%></p>
-                    <p><%= clickedTicket.ticket_creation_date%></p>
-                    <p><%= clickedTicket.assigned_developer%></p>
+                    <p><b>Date Created: </b><%= clickedTicket.ticket_creation_date%></p>
+                    <p><b>Assigned Dev: </b><%= clickedTicket.assigned_developer_email ?? "Unnasigned"%></p>
 
                     <!-- dev loop -->
                     <%if(user.role === "admin" ) {%>

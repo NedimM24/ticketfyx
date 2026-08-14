@@ -9,8 +9,8 @@
 <body>
     <body>
     <%- include("partials/errors.ejs") %>
-    <%=title%>
-    <form action="/register" method="post">
+     <img class="login-logo" src="/css/images/ticketfyxlogo.png" alt="TicketFyx logo">
+    <form class="login-page" action="/register" method="post">
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required minlength="3" maxlength="254">
@@ -23,8 +23,16 @@
 
         <button type="submit">Create Account</button>
 
+        <p>Already have an account? <a href="/login">Login</a></p>
+
     </form>
-    <%- include("partials/footer.ejs") %>
+     
+     <footer class="footer">
+    
+    <p>A tracking and collaboration tool</p>
+    <p>Built by Nedim Mulahusic</p>
+    <p>© 2026 TicketFyx</p>
+    </footer>
 
 </body>
     

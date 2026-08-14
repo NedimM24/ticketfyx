@@ -11,6 +11,7 @@ type Ticket = {
     creator: number;
     creator_email: string;
     assigned_developer: number | null;
+    assigned_developer_email: string | null;
 }
 
 //CREATE
@@ -31,9 +32,15 @@ export async function newTicket(
 //GETS ALL TICKETS, JOINED WITH USERS TO INCLUDE CREATORS EMAIL. EASIER TO DISPLAY
 export async function getAllTickets(): Promise<Ticket[]>{
     const result = await pool.query(
-        `SELECT tickets.*, users.email AS creator_email
+        `SELECT 
+            tickets.*,
+            creator_user.email AS creator_email,
+            developer_user.email AS assigned_developer_email
          FROM tickets
-         JOIN users ON tickets.creator = users.id 
+         JOIN users AS creator_user
+            ON tickets.creator = creator_user.id
+         LEFT JOIN users AS developer_user
+            ON tickets.assigned_developer = developer_user.id
          ORDER BY ticket_creation_date DESC`
     )
     return result.rows;
@@ -42,9 +49,15 @@ export async function getAllTickets(): Promise<Ticket[]>{
 //GETS MY TICKETS, JOINED WITH USERS TO INCLUDE CREATORS EMAIL. EASIER TO DISPLAY
 export async function getMyTickets(id: number): Promise<Ticket[]>{
     const result = await pool.query(
-        `SELECT tickets.*, users.email AS creator_email
+        `SELECT 
+            tickets.*,
+            creator_user.email AS creator_email,
+            developer_user.email AS assigned_developer_email
          FROM tickets
-         JOIN users ON tickets.creator = users.id 
+         JOIN users AS creator_user
+            ON tickets.creator = creator_user.id
+         LEFT JOIN users AS developer_user
+            ON tickets.assigned_developer = developer_user.id
          WHERE tickets.creator = $1
          ORDER BY ticket_creation_date DESC`,
          [id]
@@ -54,9 +67,14 @@ export async function getMyTickets(id: number): Promise<Ticket[]>{
 
 export async function getTicketById(id: number): Promise<Ticket | null> {
     const result = await pool.query(
-         `SELECT tickets.*, users.email AS creator_email
+         `SELECT tickets.*, 
+            creator_user.email AS creator_email,
+            developer_user.email AS assigned_developer_email
          FROM tickets
-         JOIN users ON tickets.creator = users.id 
+         JOIN users AS creator_user
+            ON tickets.creator = creator_user.id
+         LEFT JOIN users AS developer_user
+            ON tickets.assigned_developer = developer_user.id
          WHERE tickets.id = $1
          ORDER BY ticket_creation_date DESC`,
          [id]
