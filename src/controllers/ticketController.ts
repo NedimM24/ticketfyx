@@ -5,7 +5,8 @@ import { newTicket,
             getTicketById,
             updateTicketStatus,
             updateTicketPriority,
-            deleteTicketById
+            deleteTicketById,
+            updateAssignedDev
         } from '../db/ticketQueries';
 
 import { printCommentsByTicketId
@@ -13,6 +14,7 @@ import { printCommentsByTicketId
  } from '../db/commentQueries';
 
  import { getAllDevs } from '../db/authQueries';
+import { log } from 'console';
 
 // Need to tell TS about the user
 type AuthenticatedUser = {
@@ -94,7 +96,7 @@ export async function handleUpdateTicketStatus(req: Request, res: Response){
 }
 
 //FUNCTION GETS TICKETID FORM PARAMS AND PRIORITY FROM REQ BODY FROM ADMIN/DEV DROPDOWN
-//USED THOSE VARIBLED TO QUERY THE DB TO UPDATE PRIORITY 
+//USED THOSE VARIBLES TO QUERY THE DB TO UPDATE PRIORITY 
 export async function handleUpdateTicketPriority(req: Request, res: Response){
     const ticketId = Number(req.params.id)
     const {priority} = req.body;
@@ -115,5 +117,28 @@ export async function handleDeleteTicketById(req: Request, res: Response){
     res.redirect('/');
 }
 
+//FUNCTION THAT UPDATES THE CURRENT TICKETS ASSIGNED DEV WHEN THE ADMIN CLICKS IT
+//ID IS FOUND IN URL PARAMS ON TICKET PAGE AND DEVID IN THE BODY IN THE FORM
+//VARIABLES PASSED TO UPDATE QUERY
+export async function handleUpdateAssignedDev(req: Request, res: Response){
+
+    console.log('hit');
+    console.log('params', req.params);
+    console.log('body', req.body);
+    
+    
+    
+
+    const ticketId = Number(req.params.id);
+    const devId = Number(req.body.devId); 
+
+    console.log('ticket',ticketId);
+    console.log('dev', devId);
+    
+    
+
+    await updateAssignedDev(ticketId, devId);
+    res.redirect(`/ticketPage/${ticketId}`)
+}
 
 

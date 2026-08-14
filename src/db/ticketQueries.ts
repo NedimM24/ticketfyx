@@ -87,6 +87,17 @@ export async function updateTicketPriority(id: number, priority: string): Promis
     )
 }
 
+//UPDATES THE CURRENT TICKET TO HAVE ASSIGNED DEV THATS PASSED IN
+//USED IN TICKET CONTROLLER
+export async function updateAssignedDev(ticket_id: number, dev_id: number): Promise<void>{
+    await pool.query(
+        `UPDATE tickets
+        SET assigned_developer = $1
+        WHERE id = $2`,
+        [dev_id, ticket_id]
+    )
+}
+
 //DELETE
 
 //DELETES TICKET BASED ON THE GIVEN TICKET ID

@@ -14,7 +14,8 @@ import { showNewTicketForm,
           showTicketPage,
           handleUpdateTicketStatus,
           handleUpdateTicketPriority,
-          handleDeleteTicketById
+          handleDeleteTicketById,
+          handleUpdateAssignedDev
 } from '../controllers/ticketController';
 
 import { handleDeleteCommentById, insertNewComment
@@ -50,6 +51,7 @@ router.get('/ticketPage/:id', showTicketPage);
 //UPDATE ROUTES
 router.post('/ticket/:id/status', isAuth,  handleUpdateTicketStatus);
 router.post('/ticket/:id/priority', isAuth,  handleUpdateTicketPriority);
+router.post('/ticketPage/:id/assign', isAdmin, handleUpdateAssignedDev);
 
 //DELETE ROUTES
 router.post('/ticketPage/:id/delete', isAdmin, handleDeleteTicketById);

@@ -11,11 +11,6 @@
 
 <body>
     <main>
-
-        <%if(user.role === "admin" || user.role === "developer") {%>
-            <h1>hiya</h1>
-        <%}%>
-
           <%- include("partials/header.ejs") %>
         <div class="ticketpage-container">
 
@@ -90,7 +85,7 @@
                         <p><%= clickedTicket.status%></p>
                     <%}%>    
 
-                    <p><%= clickedTicket.creator_email%></p>
+                    <p><b>Username: </b><%= clickedTicket.creator_email%></p>
                     <p><%= clickedTicket.ticket_creation_date%></p>
                     <p><%= clickedTicket.assigned_developer%></p>
 
@@ -98,10 +93,9 @@
                     <%if(user.role === "admin" ) {%>
                         <form class="dev dropdown" 
                         action="/ticketPage/<%=clickedTicket.id%>/assign" method="post"
-                        onchange="this.form.submit()"
                         >
 
-                        <select name="assigned-dev" id="assigned-dev">
+                        <select name="devId" id="devId" onchange="this.form.submit()">
                             <option value="placeholer" selected>Assign New Dev</option>
                             <%devs.forEach((dev) => {%>
                                 <option value="<%=dev.id%>"><%=dev.email%></option>
