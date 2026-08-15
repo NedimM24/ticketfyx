@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    padding: 0;
+    
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,7 @@ main{
     border: solid 1px rgb(163, 162, 162);
     padding: .5rem;
     gap: .6rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
 }
 
 .ticket > * {
@@ -46,13 +47,146 @@ main{
 }
 
 .ticket-container{
-
-    padding: .4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     margin-bottom: .5rem;
-   
 }
 
 .title-desc {
+    
+    margin-top: .5rem;
+    min-width: 0;
+    flex: 1;
+    gap: 0;
+    width: 140px;
+}
+
+.title-desc p  {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticket-title {
+    display: block;
+    width: 136px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-dev{
+    width: 100px;
+    min-width: 0;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.low,
+.medium,
+.high,
+.critical {
+    border-radius: 10px;
+    padding: .3rem;
+}
+
+.low {
+    background-color: rgb(191, 223, 191);
+}
+
+.medium{
+    background-color: rgb(230, 230, 94);
+}
+
+.high{
+    background-color: rgb(250, 191, 82);
+}
+
+.critical{
+    background-color: rgb(243, 117, 117);
+}
+
+/*HOME PAGE STYLING*/
+.home-btn-container{
+    text-align: center;
+    padding: 1.3rem;
+    
+}
+
+.home-btn{
+    display: inline-block;
+    text-decoration: none;
+    background-color: #706FF5;
+    border: none;
+    padding: .6rem;
+    background-color: #706FF5;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+    
+}
+
+.home-btn:hover{
+    transform: scale(1.015);
+}
+
+.home-btn:active{
+    transform: scale(1.01);
+}
+
+
+/* TICKET MEDIA QUERY */
+@media (min-width: 375px){
+    .title-desc {
+    
+    margin-top: .5rem;
+    min-width: 0;
+    flex: 1;
+    gap: 0;
+    width: 150px;
+}
+
+.title-desc p  {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticket-title {
+    display: block;
+    width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-dev{
+    width: 60px;
+    min-width: 0;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+}
+
+@media (max-width: 375px){
+    .header-logo{
+        height: 55px;
+    }
+
+    .footer-logo{
+        height: 45px;
+    }
+}
+
+/* TICKET MEDIA QUERY */
+@media (min-width: 425px){
+    .title-desc {
     
     margin-top: .5rem;
     min-width: 0;
@@ -70,7 +204,7 @@ main{
 
 .ticket-title {
     display: block;
-    width: 180px;
+    width: 160px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -84,7 +218,43 @@ main{
     overflow: hidden;
     text-overflow: ellipsis
 }
+}
 
+/* TICKET MEDIA QUERY */
+@media (min-width: 768px){
+    .title-desc {
+    
+    margin-top: .5rem;
+    min-width: 0;
+    flex: 1;
+    gap: 0;
+    width: 150px;
+}
+
+.title-desc p  {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticket-title {
+    display: block;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-dev{
+    width: 130px;
+    min-width: 0;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+}
 
 /* HEADER STYLING */
 .header{
@@ -124,9 +294,8 @@ main{
 .login-page{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-   
-
+    width: min(75%, 500px);
+    box-sizing: border-box;
     
     align-self: center;
     gap: .3rem;
@@ -155,10 +324,9 @@ input {
 }
 
 .login-logo{
-    display: flex;
+    width: min(30vw, 125px);
+    height: auto;
     align-self: center;
-    height: 120px;
-    width: 120px;
    
 }
 
@@ -169,3 +337,4 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
     -webkit-text-fill-color: black !important;
 }
+

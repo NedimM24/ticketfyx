@@ -13,24 +13,19 @@
 
                 <!-- if the user is a worker, they can click to become a dev
                 will move this into header eventtually -->
+                <div class="home-btn-container">
+                        <% if(user.role === 'worker'){%>
+                                <a class="home-btn" href="/devRegister">Become a dev</a>
+                        <% } %>
 
-                <% if(user.role === 'worker'){%>
-                        <a href="/devRegister">Become a dev</a>
-                <% } %>
-
-                <a href="/newTicket">Create a new ticket </a>
-                
-                <h1>hey <%= user.email%></h1>
-                <h2>You are a <%= user.role%></h2>
-                
-
-                <h1>Tickets</h1>
+                        <a class="home-btn" href="/newTicket">Create a new ticket </a>
+                </div>
                 <% tickets.forEach(function(ticket) {%>
                         <div class="ticket-container">
                                 <a class="ticket-link" href="/ticketPage/<%= ticket.id%>">
-                                        <div class="ticket">
+                                        <div class="ticket ">
 
-                                                <p><%= ticket.status%></p>
+                                                <p class="<%=ticket.priority%>"><%= ticket.status%></p>
                                                 
                                                 <div class="title-desc">
                                                         <b class="ticket-title"><%= ticket.title%></b>
