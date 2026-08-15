@@ -29,13 +29,15 @@
                         <div class="ticket-container">
                                 <a class="ticket-link" href="/ticketPage/<%= ticket.id%>">
                                         <div class="ticket">
-                                                <p><b>Title: </b><%= ticket.title%></p>
-                                                <p><b>Description: </b><%= ticket.description%></p>
-                                                <p><b>Status: </b><%= ticket.status%></p>
-                                                <p><b>Priority: </b><%= ticket.priority%></p>
-                                                <p><b>Created by: </b><%= ticket.creator_email%></p>
-                                                <p><b>Date Created: </b><%= ticket.ticket_creation_date%></p>
-                                                <p><b>Assigned Dev: </b><%= ticket.assigned_developer_email ?? "Unassigned"%></p>
+
+                                                <p><%= ticket.status%></p>
+                                                
+                                                <div class="title-desc">
+                                                        <b class="ticket-title"><%= ticket.title%></b>
+                                                        <p><%= ticket.description%></p>
+                                                </div>
+                                                
+                                                <p class="home-dev"><%= ticket.assigned_developer_email ?? "Unassigned"%></p>
                                         </div> 
                                 </a>
                         </div>
