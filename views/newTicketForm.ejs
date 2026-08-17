@@ -1,15 +1,15 @@
 <body>
         <%- include("partials/header.ejs") %>
         <%- include("partials/errors.ejs") %>
-        <form action="/newTicket" method="post">
+        <form class="login-page new-ticket-form" action="/newTicket" method="post">
 
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" required>
 
             <label for="description">Describe your issue:</label>
-            <textarea name="description" id="description" required></textarea>
+            <textarea class="ticket-desc" name="description" id="description" required></textarea>
 
-            <label>Priority</label>
+            <label>Priority:</label>
             <label for="low">
                 <input type="radio" id="low" name="priority" value="low" checked>
                 Low
@@ -30,7 +30,7 @@
                 Critical
             </label>      
 
-            <button type="submit">Submit ticket</button>
+            <button class="dev-btn" type="submit">Submit ticket</button>
 
         </form>
         <%- include("partials/footer.ejs") %>
