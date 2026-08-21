@@ -14,8 +14,8 @@
 
 <body>
     <main>
+        <%- include("partials/header.ejs") %>
         <div class="ticket-parent">
-            <%- include("partials/header.ejs") %>
            <div class="ticket-header">
                 <p class="ticket-header-title">
                     <b><%= clickedTicket.title%></b>
@@ -174,5 +174,5 @@
     </main>
     <%- include("partials/footer.ejs") %>
 </body>
-</body>
+
 </html>
