@@ -31,3 +31,15 @@ export const isDeveloper: RequestHandler = (req, res, next): void => {
     }
 };
 
+//If user is an dev or admin we can move forward
+export const isDevOrAdmin: RequestHandler = (req, res, next): void => {
+    const user = req.user as {role: string};
+
+    if(req.isAuthenticated() && (user.role === "developer" || user.role === "admin" )){
+        next();
+    } else {
+        res.redirect('/');
+    }
+};
+
+

@@ -22,7 +22,7 @@ import { handleDeleteCommentById, insertNewComment
 
  } from '../controllers/commentsController';  
 
-import { isAuth, isAdmin, isDeveloper } from './authMiddleware';
+import { isAuth, isAdmin, isDeveloper, isDevOrAdmin } from './authMiddleware';
 
 const router = express.Router();
 
@@ -46,11 +46,11 @@ router.get('/register', showForm);
 router.get('/login', showLoginForm);
 router.get('/devRegister', isAuth, showDevRegisterForm);
 router.get('/newTicket', isAuth, showNewTicketForm);
-router.get('/ticketPage/:id', showTicketPage);
+router.get('/ticketPage/:id', isAuth, showTicketPage);
 
 //UPDATE ROUTES
-router.post('/ticket/:id/status', isAuth,  handleUpdateTicketStatus);
-router.post('/ticket/:id/priority', isAuth,  handleUpdateTicketPriority);
+router.post('/ticket/:id/status', isDevOrAdmin,  handleUpdateTicketStatus);
+router.post('/ticket/:id/priority', isDevOrAdmin,  handleUpdateTicketPriority);
 router.post('/ticketPage/:id/assign', isAdmin, handleUpdateAssignedDev);
 
 //DELETE ROUTES
