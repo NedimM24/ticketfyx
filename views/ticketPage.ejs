@@ -14,116 +14,136 @@
 
 <body>
     <main>
-          <%- include("partials/header.ejs") %>
+        <div class="ticket-parent">
+            <%- include("partials/header.ejs") %>
+           <div class="ticket-header">
+                <p class="ticket-header-title">
+                    <b><%= clickedTicket.title%></b>
+                </p>
+
+                <div class="status-priority">
+                    <p class="<%=clickedTicket.priority%>">
+                        <%= clickedTicket.status%>
+                    </p>
+
+                    <p class="ct-priority">
+                        <%=clickedTicket.priority%> priority
+                    </p>
+                </div>
+            </div>
         <div class="ticketpage-container">
 
                 <div class="clickedTicket">
-                    <p><b>Title: </b><%= clickedTicket.title%></p>
-                    <p><b>Description: </b><%= clickedTicket.description%></p>
-
+                 
+                    <div class="left">
+                     <b>Description </b> 
+                     <p><%= clickedTicket.description%></p>
+                    </div>
                     
-                    <%if(user.role === "admin" || user.role === "developer") {%>
-                        <form class="status dropdown" 
-                            action="/ticket/<%=clickedTicket.id%>/status" 
-                            method="post">
+                    <div class="right">
+                        <%if(user.role === "admin" || user.role === "developer") {%>
+                            <form class="status dropdown" 
+                                action="/ticket/<%=clickedTicket.id%>/status" 
+                                method="post">
 
-                            <!--'open', 'in progress', 'testing', 'resolved' -->
-                            <select name="status" id="status" onchange="this.form.submit()">
-                                <option value="open" 
-                                    <%= clickedTicket.status === "open" ? "selected" : ""%> 
-                                    >Open
-                                </option>
+                                <!--'open', 'in progress', 'testing', 'resolved' -->
+                                <select name="status" id="status" onchange="this.form.submit()">
+                                    <option value="open" 
+                                        <%= clickedTicket.status === "open" ? "selected" : ""%> 
+                                        >Open
+                                    </option>
 
-                                <option value="in progress" 
-                                    <%= clickedTicket.status === "in progress" ? "selected" : ""%> 
-                                    >In Progress
-                                </option>
+                                    <option value="in progress" 
+                                        <%= clickedTicket.status === "in progress" ? "selected" : ""%> 
+                                        >In Progress
+                                    </option>
 
-                                <option value="testing" 
-                                    <%= clickedTicket.status === "testing" ? "selected" : ""%> 
-                                    >Testing
-                                </option>
+                                    <option value="testing" 
+                                        <%= clickedTicket.status === "testing" ? "selected" : ""%> 
+                                        >Testing
+                                    </option>
 
-                                <option value="resolved" 
-                                    <%= clickedTicket.status === "resolved" ? "selected" : ""%> 
-                                    >Resolved
-                                </option>
-                                
+                                    <option value="resolved" 
+                                        <%= clickedTicket.status === "resolved" ? "selected" : ""%> 
+                                        >Resolved
+                                    </option>
+                                    
+                                </select>
+                            </form>
+                        <%} else {%>
+                            <p>✅ <b>Status: </b><%= clickedTicket.status%></p>
+                        <%}%>  
+                        
+                        <!-- 'low', 'medium', 'high', 'critical'-->
+                        <%if(user.role === "admin" || user.role === "developer") {%>
+                            <form class="priority dropdown" 
+                                action="/ticket/<%=clickedTicket.id%>/priority" 
+                                method="post">
+
+                                <select name="priority" id="priority" onchange="this.form.submit()">
+                                    <option value="low" 
+                                        <%= clickedTicket.priority === "low" ? "selected" : ""%> 
+                                        >Low
+                                    </option>
+
+                                    <option value="medium" 
+                                        <%= clickedTicket.priority === "medium" ? "selected" : ""%> 
+                                        >Medium
+                                    </option>
+
+                                    <option value="high" 
+                                        <%= clickedTicket.priority === "high" ? "selected" : ""%> 
+                                        >High
+                                    </option>
+
+                                    <option value="critical" 
+                                        <%= clickedTicket.priority === "critical" ? "selected" : ""%> 
+                                        >Critical
+                                    </option>
+                                    
+                                </select>
+                            </form>
+                        <%} else {%>
+                            <p>🚩 <b>Priority: </b><%= clickedTicket.priority%></p>
+                        <%}%>    
+
+                        <p>👤 <b>Username: </b><%= clickedTicket.creator_email%></p>
+                        <p>📅 <b>Date Created: </b><%= clickedTicket.ticket_creation_date%></p>
+                        <p>🤝 <b>Assigned Dev: </b><%= clickedTicket.assigned_developer_email ?? "Unnasigned"%></p>
+
+                        <!-- dev loop -->
+                        <%if(user.role === "admin" ) {%>
+                            <form class="dev dropdown" 
+                            action="/ticketPage/<%=clickedTicket.id%>/assign" method="post"
+                            >
+
+                            <select name="devId" id="devId" onchange="this.form.submit()">
+                                <option value="placeholer" selected>Assign New Dev</option>
+                                <%devs.forEach((dev) => {%>
+                                    <option value="<%=dev.id%>"><%=dev.email%></option>
+                                <%})%>
                             </select>
-                        </form>
-                    <%} else {%>
-                        <p><b>Status: </b><%= clickedTicket.status%></p>
-                    <%}%>  
-                    
-                    <!-- 'low', 'medium', 'high', 'critical'-->
-                    <%if(user.role === "admin" || user.role === "developer") {%>
-                        <form class="priority dropdown" 
-                            action="/ticket/<%=clickedTicket.id%>/priority" 
-                            method="post">
-
-                            <select name="priority" id="priority" onchange="this.form.submit()">
-                                <option value="low" 
-                                    <%= clickedTicket.priority === "low" ? "selected" : ""%> 
-                                    >Low
-                                </option>
-
-                                <option value="medium" 
-                                    <%= clickedTicket.priority === "medium" ? "selected" : ""%> 
-                                    >Medium
-                                </option>
-
-                                <option value="high" 
-                                    <%= clickedTicket.priority === "high" ? "selected" : ""%> 
-                                    >High
-                                </option>
-
-                                <option value="critical" 
-                                    <%= clickedTicket.priority === "critical" ? "selected" : ""%> 
-                                    >Critical
-                                </option>
                                 
-                            </select>
-                        </form>
-                    <%} else {%>
-                        <p><b>Priority: </b><%= clickedTicket.priority%></p>
-                    <%}%>    
+                            </form>
+                        <%}%>  
 
-                    <p><b>Username: </b><%= clickedTicket.creator_email%></p>
-                    <p><b>Date Created: </b><%= clickedTicket.ticket_creation_date%></p>
-                    <p><b>Assigned Dev: </b><%= clickedTicket.assigned_developer_email ?? "Unnasigned"%></p>
-
-                    <!-- dev loop -->
-                    <%if(user.role === "admin" ) {%>
-                        <form class="dev dropdown" 
-                        action="/ticketPage/<%=clickedTicket.id%>/assign" method="post"
-                        >
-
-                        <select name="devId" id="devId" onchange="this.form.submit()">
-                            <option value="placeholer" selected>Assign New Dev</option>
-                            <%devs.forEach((dev) => {%>
-                                <option value="<%=dev.id%>"><%=dev.email%></option>
-                            <%})%>
-                        </select>
-                            
-                        </form>
-                    <%}%>  
-
-                    <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE TICKET BUTTON -->
-                    <%if(user.role === "admin" ) {%>
-                        <form class="delete-ticket" action="/ticketPage/<%=clickedTicket.id%>/delete" method="post">
-                            <button type="submit">Delete Ticket</button>
-                        </form>
-                    <%}%>  
-                </div> 
-
-                <div class="comments">
-                    <h5>comments</h5>
+                        <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE TICKET BUTTON -->
+                        <%if(user.role === "admin" ) {%>
+                            <form class="delete-ticket" action="/ticketPage/<%=clickedTicket.id%>/delete" method="post">
+                                <button type="submit">Delete Ticket</button>
+                            </form>
+                        <%}%>  
+                    </div> 
+                </div>
+        </div>
+         <div class="comments">
+                    <h5 class="comment-title">comments</h5>
 
                     <!---PRINT COMMENTS HERE -->
 
                     <%comments.forEach((comment) => {%>
                         <div class="comment">
-                            <p><%=comment.creator_email%></p>
+                            <p> <b><%=comment.creator_email%></b></p>
                             <p><%=comment.comment%></p>
                             <p><%=comment.comment_creation_date%></p>
 
@@ -138,15 +158,15 @@
                     <%})%>
 
                     <%- include("partials/errors.ejs") %>
-                    <form action="/comment/<%= clickedTicket.id%>" method="post">
+                    <form class="comment-form" action="/comment/<%= clickedTicket.id%>" method="post">
                         <label for="comment"></label>
-                        <input type="text" name="comment" id="comment"
+                        <input class="comment-input" type="text" name="comment" id="comment"
                         placeholder="write comment here" required>
 
-                        <button type="submit">Send</button>
+                        <button class="dev-btn" type="submit">Send</button>
 
                     </form>
-                </div>
+            </div>
         </div>
     </main>
     <%- include("partials/footer.ejs") %>
