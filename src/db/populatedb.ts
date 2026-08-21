@@ -45,15 +45,15 @@ VALUES
     'Users report a server error when submitting the login form with valid credentials.',
     'open',
     'high',
-    (SELECT id FROM users WHERE email = 'alice_worker'),
-    (SELECT id FROM users WHERE email = 'bob_dev')
+    (SELECT id FROM users WHERE email = 'nedWorker@gmail.com'),
+    (SELECT id FROM users WHERE email = 'nedAdmin@gmail.com')
   );
 
 INSERT INTO comments (comment, creator, ticket_id)
 VALUES
   (
     'Can confirm — looking into the session middleware now.',
-    (SELECT id FROM users WHERE email = 'bob_dev'),
+    (SELECT id FROM users WHERE email = 'nedAdmin@gmail.com'),
     (SELECT id FROM tickets WHERE title = 'Login page throws 500 error')
   );
 

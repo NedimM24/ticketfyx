@@ -46,6 +46,7 @@
                                 action="/ticket/<%=clickedTicket.id%>/status" 
                                 method="post">
 
+                                <label for="status">Update Status: </label>
                                 <!--'open', 'in progress', 'testing', 'resolved' -->
                                 <select name="status" id="status" onchange="this.form.submit()">
                                     <option value="open" 
@@ -79,6 +80,8 @@
                             <form class="priority dropdown" 
                                 action="/ticket/<%=clickedTicket.id%>/priority" 
                                 method="post">
+
+                                <label for="priority">Update Priority: </label>
 
                                 <select name="priority" id="priority" onchange="this.form.submit()">
                                     <option value="low" 
@@ -130,7 +133,7 @@
                         <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE TICKET BUTTON -->
                         <%if(user.role === "admin" ) {%>
                             <form class="delete-ticket" action="/ticketPage/<%=clickedTicket.id%>/delete" method="post">
-                                <button type="submit">Delete Ticket</button>
+                                <button class="delete-ticket-btn" type="submit">Delete Ticket</button>
                             </form>
                         <%}%>  
                     </div> 
@@ -149,8 +152,8 @@
 
                              <!-- IF THE USER IS AN ADMIN, THEY HAVE A DELETE COMMENT BUTTON -->
                             <%if(user.role === "admin" ) {%>
-                                <form class="delete-comment" action="/ticketPage/<%=clickedTicket.id%>/comments/<%=comment.id%>/delete" method="post">
-                                    <button type="submit">Delete Comment</button>
+                                <form  action="/ticketPage/<%=clickedTicket.id%>/comments/<%=comment.id%>/delete" method="post">
+                                    <button class="delete-comment" type="submit">Delete Comment</button>
                                 </form>
                             <%}%>  
 

@@ -23,7 +23,7 @@ app.use(session({
         tableName: "session",
         createTableIfMissing: true
     }),
-    secret: "my-secret-key",
+    secret: process.env.SESSION_SECRET || "my-secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
