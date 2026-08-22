@@ -4,7 +4,8 @@
 A full-stack issue tracking platform where users can report, manage, and resolve software issues together. Built to practice authentication, relational database design, and role-based authorization.
 
 Live demo: https://ticketfyx-production.up.railway.app
-ADMIN LOGIN - nedAdmin@gmail.com\password123
+ADMIN LOGIN - nedAdmin@gmail.com / password123
+(Demo data may be reset periodically. Feel free to explore admin features.)
 
 ## Overview
 
